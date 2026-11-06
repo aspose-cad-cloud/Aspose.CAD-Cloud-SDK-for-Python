@@ -73,7 +73,7 @@ class PostDrawingResizeRequest(CadRequest):
             raise ValueError("Missing the required parameter `new_height` when calling `post_drawing_resize`")
 
         collection_formats = {}
-        path = '/cad/resize'
+        path = '/cad/resize/{outputFormat}'
         path_params = {}
 
         query_params = []

@@ -68,7 +68,7 @@ class PostDrawingRotateFlipRequest(CadRequest):
             raise ValueError("Missing the required parameter `rotate_flip_type` when calling `post_drawing_rotate_flip`")
 
         collection_formats = {}
-        path = '/cad/rotateflip'
+        path = '/cad/rotateflip/{outputFormat}'
         path_params = {}
 
         query_params = []

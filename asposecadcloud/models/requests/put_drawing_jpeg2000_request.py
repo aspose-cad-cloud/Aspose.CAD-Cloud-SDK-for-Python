@@ -26,7 +26,7 @@
 
 from asposecadcloud.models.requests.cad_request import CadRequest
 from asposecadcloud.models.requests.http_request import HttpRequest
-
+from asposecadcloud.models.requests.form_param_json_serializer import FormParamJsonSerializer
 
 class PutDrawingJpeg2000Request(CadRequest):
     """
@@ -82,7 +82,7 @@ class PutDrawingJpeg2000Request(CadRequest):
         if self.drawing_data is not None:
             local_var_files.append((self._lowercase_first_letter('drawingData'), self.drawing_data))
         if self.export_options is not None:
-            form_params.append((self._lowercase_first_letter('exportOptions'), self.export_options))
+            form_params.append(FormParamJsonSerializer.prepare_form_param(self.export_options, self._lowercase_first_letter('exportOptions'), 'exportOptions.json'))
 
         body_params = None
 

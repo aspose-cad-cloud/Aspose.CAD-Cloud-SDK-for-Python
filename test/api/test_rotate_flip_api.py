@@ -38,7 +38,9 @@ class TestRotateFlipApi(CadApiTester):
         Performs RotateFlip (export to another format) operation test with GET
         method, taking input data from storage
         """
-
+        
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         if not self.EXTENDED_TEST:
             format_extension_test_cases = ['bmp']
@@ -77,23 +79,25 @@ class TestRotateFlipApi(CadApiTester):
                             return self.cad_api.get_drawing_rotate_flip(
                                 requests.GetDrawingRotateFlipRequest(name, format_extension, "Rotate180FlipNone", self.original_data_folder, output_path, storage))
 
-                    self.get_request_tester(
-                            operation,
-                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension, output_path),
-                            name,
-                            output_path,
-                            request_invoker,
-                            lambda x, y, z: None,
-                            folder,
-                            reference_file_name,
-                            storage)
+                        self.get_request_tester(
+                                operation,
+                                'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension, output_path),
+                                name,
+                                output_path,
+                                request_invoker,
+                                lambda x, y, z: None,
+                                folder,
+                                reference_file_name,
+                                storage)
 
     def test_post_rotate_flip_image(self):
         """
         Performs RotateFlip (export to another format) operation test with POST
         method, sending input data in request stream.
         """
-
+        
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         if not self.EXTENDED_TEST:
             format_extension_test_cases = ['gif']
@@ -132,16 +136,16 @@ class TestRotateFlipApi(CadApiTester):
                             return self.cad_api.post_drawing_rotate_flip(
                                 requests.PostDrawingRotateFlipRequest(input_stream, format_extension, "RotateNoneFlipY", output_path, storage))
 
-                    self.post_request_tester(
-                            operation,
-                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension, output_path),
-                            name,
-                            output_path,
-                            request_invoker,
-                            lambda x, y, z: None,
-                            folder,
-                            reference_file_name,
-                            storage)
+                        self.post_request_tester(
+                                operation,
+                                'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension, output_path),
+                                name,
+                                output_path,
+                                request_invoker,
+                                lambda x, y, z: None,
+                                folder,
+                                reference_file_name,
+                                storage)
 
 #t = TestRotateFlipApi()
 #t.setUp()

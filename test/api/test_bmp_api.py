@@ -39,7 +39,9 @@ class TestBmpApi(CadApiTester):
         """
         Convert drawing to bmp
         """
-
+        
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         format_extension_test_cases = ['bmp']
 
@@ -76,23 +78,25 @@ class TestBmpApi(CadApiTester):
                             return self.cad_api.put_drawing_bmp(
                                 requests.PutDrawingBmpRequest(input_stream, output_path, None, storage))
 
-                    self.put_request_tester(
-                        operation,
-                        'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
-                                                                                     output_path),
-                        name,
-                        output_path,
-                        request_invoker,
-                        lambda x, y, z: None,
-                        folder,
-                        reference_file_name,
-                        storage)
+                        self.put_request_tester(
+                            operation,
+                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
+                                                                                         output_path),
+                            name,
+                            output_path,
+                            request_invoker,
+                            lambda x, y, z: None,
+                            folder,
+                            reference_file_name,
+                            storage)
 
     def test_put_bmp_with_options(self):
         """
         Convert drawing to bmp
         """
-
+        
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         format_extension_test_cases = ['bmp']
 
@@ -142,23 +146,25 @@ class TestBmpApi(CadApiTester):
                             return self.cad_api.put_drawing_bmp(
                                 requests.PutDrawingBmpRequest(input_stream, output_path, fr"{rt}", storage))
 
-                    self.put_request_tester(
-                        operation,
-                        'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
-                                                                                     output_path),
-                        name,
-                        output_path,
-                        request_invoker,
-                        lambda x, y, z: None,
-                        folder,
-                        reference_file_name,
-                        storage)
+                        self.put_request_tester(
+                            operation,
+                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
+                                                                                         output_path),
+                            name,
+                            output_path,
+                            request_invoker,
+                            lambda x, y, z: None,
+                            folder,
+                            reference_file_name,
+                            storage)
 
     def test_post_bmp(self):
         """
         Convert drawing to bmp
         """
-
+        
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         format_extension_test_cases = ['bmp']
 
@@ -207,14 +213,14 @@ class TestBmpApi(CadApiTester):
                             return self.cad_api.post_drawing_bmp(
                                 requests.PostDrawingBmpRequest(name, bmp_opt, folder, output_path, storage))
 
-                    self.post_request_tester(
-                        operation,
-                        'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
-                                                                                     output_path),
-                        name,
-                        output_path,
-                        request_invoker,
-                        lambda x, y, z: None,
-                        folder,
-                        reference_file_name,
-                        storage)
+                        self.post_request_tester(
+                            operation,
+                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
+                                                                                         output_path),
+                            name,
+                            output_path,
+                            request_invoker,
+                            lambda x, y, z: None,
+                            folder,
+                            reference_file_name,
+                            storage)

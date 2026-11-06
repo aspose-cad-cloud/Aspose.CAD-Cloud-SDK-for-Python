@@ -129,3 +129,18 @@ dmypy.json
 .pyre/
 /TestData/serverAccess.json
 /.idea
+
+### --- Visual Studio (Python) ---
+*.pyproj
+*.pyproj.user
+*.sln
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+.vs/
+.vspscc
+[Bb]in/
+[Oo]bj/
+
+ReferenceData/

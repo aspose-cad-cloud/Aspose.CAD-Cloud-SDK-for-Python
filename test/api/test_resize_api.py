@@ -38,7 +38,9 @@ class TestResizeApi(CadApiTester):
         Performs Resize (export to another format) operation test with GET
         method, taking input data from storage
         """
-
+        
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         if not self.EXTENDED_TEST:
             format_extension_test_cases = ['bmp']
@@ -77,23 +79,25 @@ class TestResizeApi(CadApiTester):
                             return self.cad_api.get_drawing_resize(
                                 requests.GetDrawingResizeRequest(name, format_extension, 640, 480, self.original_data_folder, output_path, storage))
 
-                    self.get_request_tester(
-                            operation,
-                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension, output_path),
-                            name,
-                            output_path,
-                            request_invoker,
-                            lambda x, y, z: None,
-                            folder,
-                            reference_file_name,
-                            storage)
+                        self.get_request_tester(
+                                operation,
+                                'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension, output_path),
+                                name,
+                                output_path,
+                                request_invoker,
+                                lambda x, y, z: None,
+                                folder,
+                                reference_file_name,
+                                storage)
 
     def test_post_resize_image(self):
         """
         Performs Resize (export to another format) operation test with POST
         method, sending input data in request stream.
         """
-
+        
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         if not self.EXTENDED_TEST:
             format_extension_test_cases = ['gif']
@@ -132,16 +136,16 @@ class TestResizeApi(CadApiTester):
                             return self.cad_api.post_drawing_resize(
                                 requests.PostDrawingResizeRequest(input_stream, format_extension, 320, 240, output_path, storage))
 
-                    self.post_request_tester(
-                            operation,
-                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension, output_path),
-                            name,
-                            output_path,
-                            request_invoker,
-                            lambda x, y, z: None,
-                            folder,
-                            reference_file_name,
-                            storage)
+                        self.post_request_tester(
+                                operation,
+                                'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension, output_path),
+                                name,
+                                output_path,
+                                request_invoker,
+                                lambda x, y, z: None,
+                                folder,
+                                reference_file_name,
+                                storage)
 
 #t = TestResizeApi()
 #t.setUp()

@@ -75,7 +75,7 @@ class GetDrawingResizeRequest(CadRequest):
             raise ValueError("Missing the required parameter `new_height` when calling `get_drawing_resize`")
 
         collection_formats = {}
-        path = '/cad/{name}/resize'
+        path = '/cad/{name}/resize/{outputFormat}'
         path_params = {}
         if self.name is not None:
             path_params[self._lowercase_first_letter('name')] = self.name

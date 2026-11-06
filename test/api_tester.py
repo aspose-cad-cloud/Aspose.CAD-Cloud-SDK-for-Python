@@ -153,23 +153,43 @@ class ApiTester(unittest.TestCase):
         if not testFolderExists.exists:
             self.cad_api.create_folder(requests.CreateFolderRequest(path=self.original_data_folder, storage_name=self.test_storage))
 
+        # Getting an up-to-date list of files in the remote storage.
         self.input_test_files = self.cad_api.get_files_list(requests.GetFilesListRequest(
+            path=self.original_data_folder,
+            storage_name=self.test_storage)).value
+
+        # Extract only file names from the remote list for quick search.
+        remote_file_names = {os.path.basename(f.path) for f in self.input_test_files}
+
+        # Collecting the names of all non-JSON files from the local folder.
+        local_file_names = {
+            filename for filename in os.listdir(self._local_test_folder)
+            if not filename.endswith(".json")
+        }
+
+        # Calculating the difference: files that are locally available but not in the remote storage.
+        files_to_sync = local_file_names - remote_file_names
+
+        # Perform the upload only if missing files are found.
+        if files_to_sync:
+            for filename in files_to_sync:
+                remote_file_name = f"{self.original_data_folder}/{filename}"
+        
+                if not self.cad_api.object_exists(requests.ObjectExistsRequest(
+                    path=remote_file_name, 
+                    storage_name=self.test_storage
+                )).exists:
+                    f = f"{self._local_test_folder}/{filename}"
+                    self.cad_api.upload_file(requests.UploadFileRequest(
+                        remote_file_name, 
+                        f, 
+                        storage_name=self.test_storage
+                    ))
+
+            # Updating the list of files after the upload is completed.
+            self.input_test_files = self.cad_api.get_files_list(requests.GetFilesListRequest(
                 path=self.original_data_folder,
                 storage_name=self.test_storage)).value
-
-        if len(self.input_test_files) == 0:
-            for filename in os.listdir(self._local_test_folder):
-                if not filename.endswith(".json"):
-                    remote_file_name = self.original_data_folder + "/" + filename
-                    if not self.cad_api.object_exists(requests.ObjectExistsRequest(path = remote_file_name, storage_name=self.test_storage)).exists:
-                        f = self._local_test_folder + "/" + filename # open(self._local_test_folder + "/" + filename, "rb").read()
-                        self.cad_api.upload_file(requests.UploadFileRequest(remote_file_name, f, storage_name=self.test_storage))
-                    continue
-                else:
-                    continue
-            self.input_test_files = self.cad_api.get_files_list(requests.GetFilesListRequest(
-                path = self.original_data_folder,
-                storage_name = self.test_storage)).value
 
     def __request_tester(
             self,

@@ -70,7 +70,7 @@ class GetDrawingRotateFlipRequest(CadRequest):
             raise ValueError("Missing the required parameter `rotate_flip_type` when calling `get_drawing_rotate_flip`")
 
         collection_formats = {}
-        path = '/cad/{name}/rotateflip'
+        path = '/cad/{name}/rotateflip/{outputFormat}'
         path_params = {}
         if self.name is not None:
             path_params[self._lowercase_first_letter('name')] = self.name

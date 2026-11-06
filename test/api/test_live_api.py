@@ -39,7 +39,9 @@ class TestLiveApi(CadApiTester):
         """
         Convert drawing to png
         """
-
+        
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         format_extension_test_cases = ['png']
 
@@ -74,23 +76,25 @@ class TestLiveApi(CadApiTester):
                             return self.cad_api.convert(
                                 requests.ConvertRequest(input_stream, format_extension, None))
 
-                    self.post_request_tester(
-                        operation,
-                        'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
-                                                                                     output_path),
-                        name,
-                        output_path,
-                        request_invoker,
-                        lambda x, y, z: None,
-                        folder,
-                        reference_file_name,
-                        storage)
+                        self.post_request_tester(
+                            operation,
+                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
+                                                                                         output_path),
+                            name,
+                            output_path,
+                            request_invoker,
+                            lambda x, y, z: None,
+                            folder,
+                            reference_file_name,
+                            storage)
 
     def test_watermark(self):
         """
         Convert drawing to png with watermark
         """
-
+        
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         format_extension_test_cases = ['png']
 
@@ -131,23 +135,25 @@ class TestLiveApi(CadApiTester):
                             return self.cad_api.watermark(
                                 requests.WatermarkRequest(input_stream, format_extension, fr"{watermark_json}", None))
 
-                    self.post_request_tester(
-                        operation,
-                        'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
-                                                                                     output_path),
-                        name,
-                        output_path,
-                        request_invoker,
-                        lambda x, y, z: None,
-                        folder,
-                        reference_file_name,
-                        storage)
+                        self.post_request_tester(
+                            operation,
+                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
+                                                                                         output_path),
+                            name,
+                            output_path,
+                            request_invoker,
+                            lambda x, y, z: None,
+                            folder,
+                            reference_file_name,
+                            storage)
 
     def test_paper_to_cad(self):
         """
         Convert raster drawing to png with watermark
         """
-
+        
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         format_extension_test_cases = ['dxf']
 
@@ -181,23 +187,25 @@ class TestLiveApi(CadApiTester):
                             return self.cad_api.paper_to_cad(
                                 requests.PaperToCadRequest(input_stream, format_extension))
 
-                    self.post_request_tester(
-                        operation,
-                        'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
-                                                                                     output_path),
-                        name,
-                        output_path,
-                        request_invoker,
-                        lambda x, y, z: None,
-                        folder,
-                        reference_file_name,
-                        storage)
+                        self.post_request_tester(
+                            operation,
+                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
+                                                                                         output_path),
+                            name,
+                            output_path,
+                            request_invoker,
+                            lambda x, y, z: None,
+                            folder,
+                            reference_file_name,
+                            storage)
 
     def test_text_extractor(self):
         """
         Extract text
         """
-
+        
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         input_format = 'dxf'
         format_extension_test_cases = ['txt']
@@ -230,23 +238,25 @@ class TestLiveApi(CadApiTester):
                             return self.cad_api.extract_text(
                                 requests.ExtractTextRequest(input_stream))
 
-                    self.post_request_tester(
-                        operation,
-                        'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
-                                                                                     output_path),
-                        name,
-                        output_path,
-                        request_invoker,
-                        lambda x, y, z: None,
-                        folder,
-                        reference_file_name,
-                        storage)
+                        self.post_request_tester(
+                            operation,
+                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
+                                                                                         output_path),
+                            name,
+                            output_path,
+                            request_invoker,
+                            lambda x, y, z: None,
+                            folder,
+                            reference_file_name,
+                            storage)
 
     def test_metadata_extractor(self):
         """
         Extract metadata
         """
-
+        
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         format_extension_test_cases = ['txt', 'json', 'xml']
 
@@ -281,22 +291,24 @@ class TestLiveApi(CadApiTester):
                             return self.cad_api.extract_metadata(
                                 requests.ExtractMetadataRequest(input_stream, format_extension))
 
-                    self.post_request_tester(
-                        operation,
-                        'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
-                                                                                     output_path),
-                        name,
-                        output_path,
-                        request_invoker,
-                        lambda x, y, z: None,
-                        folder,
-                        reference_file_name,
-                        storage)
+                        self.post_request_tester(
+                            operation,
+                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension,
+                                                                                         output_path),
+                            name,
+                            output_path,
+                            request_invoker,
+                            lambda x, y, z: None,
+                            folder,
+                            reference_file_name,
+                            storage)
 
     def test_post_edit_metadata(self):
         """
         Get CAD metadata
         """
+        self.override_reference_files = True
+        self.remove_result = False
         input_format = 'dxf'
         format_extension_test_cases = ['json']
         output_path = None
@@ -326,13 +338,13 @@ class TestLiveApi(CadApiTester):
                             return self.cad_api.edit_metadata(
                                 requests.EditMetadataRequest(input_stream))
 
-                    self.post_request_tester(
-                        operation,
-                        'Input image: {0}; Output file: {1}'.format(name, reference_file_name),
-                        name,
-                        output_path,
-                        request_invoker,
-                        lambda x, y, z: None,
-                        folder,
-                        reference_file_name,
-                        storage)
+                        self.post_request_tester(
+                            operation,
+                            'Input image: {0}; Output file: {1}'.format(name, reference_file_name),
+                            name,
+                            output_path,
+                            request_invoker,
+                            lambda x, y, z: None,
+                            folder,
+                            reference_file_name,
+                            storage)

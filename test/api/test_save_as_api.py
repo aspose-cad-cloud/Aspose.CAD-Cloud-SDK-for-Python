@@ -38,7 +38,8 @@ class TestSaveAsApi(CadApiTester):
         Performs SaveAs (export to another format) operation test with GET
         method, taking input data from storage
         """
-
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         if not self.EXTENDED_TEST:
             format_extension_test_cases = ['bmp']
@@ -77,23 +78,24 @@ class TestSaveAsApi(CadApiTester):
                             return self.cad_api.get_drawing_save_as(
                                 requests.GetDrawingSaveAsRequest(name, format_extension, self.original_data_folder, output_path, storage))
 
-                    self.get_request_tester(
-                            operation,
-                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension, output_path),
-                            name,
-                            output_path,
-                            request_invoker,
-                            lambda x, y, z: None,
-                            folder,
-                            reference_file_name,
-                            storage)
+                        self.get_request_tester(
+                                operation,
+                                'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension, output_path),
+                                name,
+                                output_path,
+                                request_invoker,
+                                lambda x, y, z: None,
+                                folder,
+                                reference_file_name,
+                                storage)
 
     def test_post_save_image_as(self):
         """
         Performs SaveAs (export to another format) operation test with POST
         method, sending input data in request stream.
         """
-
+        self.override_reference_files = True
+        self.remove_result = False
         additional_export_formats = set()
         if not self.EXTENDED_TEST:
             format_extension_test_cases = ['gif']
@@ -132,16 +134,16 @@ class TestSaveAsApi(CadApiTester):
                             return self.cad_api.post_drawing_save_as(
                                 requests.PostDrawingSaveAsRequest(input_stream, format_extension, output_path, storage))
 
-                    self.post_request_tester(
-                            operation,
-                            'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension, output_path),
-                            name,
-                            output_path,
-                            request_invoker,
-                            lambda x, y, z: None,
-                            folder,
-                            reference_file_name,
-                            storage)
+                        self.post_request_tester(
+                                operation,
+                                'Input image: {0}; Output format: {1}, out path: {2}'.format(name, format_extension, output_path),
+                                name,
+                                output_path,
+                                request_invoker,
+                                lambda x, y, z: None,
+                                folder,
+                                reference_file_name,
+                                storage)
 
 #t = TestSaveAsApi()
 #t.setUp()
